@@ -1,29 +1,31 @@
 .gradient-custom {
-	background: #6a11cb;
-	background: linear-gradient(
-		to right,
-		rgba(37, 117, 252, 1),
-		rgba(37, 117, 252, 0.1)
-	);
+  background: #6a11cb;
+  background: linear-gradient(
+    to right,
+    rgba(37, 117, 252, 1),
+    rgba(37, 117, 252, 0.1)
+  );
 }
 
 .btn-parts {
-	flex-grow: 1;
-	min-width: 38px;
+  flex-grow: 1;
+  min-width: 38px;
 }
 
 .btn-parts .middle {
-	min-width: 120px;
+  min-width: 120px;
 }
 
-.error-text {
-	color: red;
+label {
+  text-align: left;
 }
-#qr_code:hover {
-	color: skyblue;
-	cursor: pointer;
-}
-#login_qrcode {
-	border: 2px dashed black;
-	border-radius: 10px;
+.position-absolute {
+  top: 3rem;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 999;
+  color: black;
+  height: 2.25rem;
+  width: 2.25rem;
 }

@@ -5,14 +5,21 @@
         <div class="card bg-dark text-white" style="border-radius: 1rem;">
           <div class="md-md-5 mt-md-4 pb-5 text-center">
             <h2 class="mt-1 text-center">Đăng nhập</h2>
-            <p class="mb-3 message">Vui lòng nhập thông tin đăng nhập</p>
+            <p class="mb-3 message">{{message()}}</p>
             <form class="login-card-form">
               <div class="form-group mx-5 mb-2">
+                <label for="username" class="w-100 mb-1">Tên đăng nhập</label>
                 <input class="form-control" type="text" placeholder="Tên đăng nhập" id="username" name="username"
-                  autofocus>
+                  [formControl]="username" autofocus>
               </div>
-              <div class="form-group mx-5 mb-2">
-                <input class="form-control" type="password" placeholder="Mật khẩu" id="password" name="password">
+              <div class="form-group mx-5 mb-2 position-relative">
+                <label for="password" class="w-100 mb-1">Mật khẩu</label>
+                <input class="form-control" [type]="showPassword() ? 'text' : 'password'" placeholder="Mật khẩu"
+                  id="password" name="password" [formControl]="password">
+                <div class="position-absolute d-flex flex-column justify-content-center"
+                  (click)="togglePasswordVisibility()">
+                  <fa-icon [icon]="showPassword()? eyeSlashIcon() : eyeIcon()"> </fa-icon>
+                </div>
               </div>
               <div class="mb-1" style="width:80%;margin-left:10%">
                 <div style="text-align:left">

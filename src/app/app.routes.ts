@@ -9,20 +9,20 @@ export const routes: Routes = [
       );
     },
   },
-  // {
-  //   path: 'factories',
-  //   loadComponent: () => {
-  //     return import('./components/factories/factories.component').then(
-  //       (c) => c.FactoriesComponent
-  //     );
-  //   },
-  // },
-  // {
-  //   path: 'lines',
-  //   loadComponent: () => {
-  //     return import('./components/lines/lines.component').then(
-  //       (c) => c.LinesComponent
-  //     );
-  //   },
-  // },
+  {
+    path: 'managers/dashboard',
+    loadComponent: () => {
+      return import('./components/managers/dashboard/dashboard.component').then(
+        (c) => c.DashboardComponent
+      );
+    },
+  },
+  {
+    path: 'users/dashboard',
+    loadComponent: () => {
+      return import('./components/users/dashboard/dashboard.component').then(
+        (c) => c.DashboardComponent
+      );
+    },
+  },
 ];

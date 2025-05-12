@@ -5,33 +5,31 @@ import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private accessToken: string | null = null;
-
   constructor(
     private http: HttpClient,
     @Inject(BASE_URL) private baseUrl: string
   ) {}
 
-  login(credentials: { email: string; password: string }) {
+  login(credentials: { username: string; password: string }) {
     return this.http
-      .post<{ accessToken: string }>(
+      .post<{ fullname: string; accessToken: string }>(
         `${this.baseUrl}/auth/login`,
         credentials,
         { withCredentials: true }
       )
       .pipe(
         tap((response) => {
-          this.accessToken = response.accessToken;
+          localStorage.setItem('access_token', response.accessToken);
         })
       );
   }
 
   getAccessToken(): string | null {
-    return this.accessToken;
+    return localStorage.getItem('access_token');
   }
 
   logout() {
-    this.accessToken = null;
+    localStorage.removeItem('access_token');
     return this.http.post(
       `${this.baseUrl}/auth/logout`,
       {},
