@@ -12,7 +12,7 @@ export class AuthService {
 
   login(credentials: { username: string; password: string }) {
     return this.http
-      .post<{ fullname: string; accessToken: string }>(
+      .post<{ fullname: string; accessToken: string; redirect: string }>(
         `${this.baseUrl}/auth/login`,
         credentials,
         { withCredentials: true }
@@ -34,6 +34,19 @@ export class AuthService {
       `${this.baseUrl}/auth/logout`,
       {},
       { withCredentials: true }
+    );
+  }
+  checkRole() {
+    const token = localStorage.getItem('access_token');
+    return this.http.post<{ role: number }>(
+      `${this.baseUrl}/auth/role`,
+      {},
+      {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
   }
 }

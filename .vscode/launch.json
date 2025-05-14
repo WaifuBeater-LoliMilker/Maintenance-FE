@@ -11,7 +11,8 @@
       "runtimeArgs": [
         "--disable-session-crashed-bubble",
         "--load-extension=C:/Users/Latitude 5520/AppData/Local/Google/Chrome/User Data/Default/Extensions/ienfalfjdbdpebioblfackkekamfmbnh/1.0.30_0"
-      ]
+      ],
+      "postDebugTask": "stop dev server"
     },
     {
       "name": "ng test",

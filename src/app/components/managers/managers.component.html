@@ -1,0 +1,20 @@
+<ul>
+  <li>
+    <a [routerLink]="['/managers/overview']" routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }">overview</a>
+  </li>
+  <li>
+    <a [routerLink]="['/managers/factories']" routerLinkActive="active-link">factories</a>
+  </li>
+  <li>
+    <a [routerLink]="['/managers/zones']" routerLinkActive="active-link">zones</a>
+  </li>
+  <li>
+    <a [routerLink]="['/managers/lines']" routerLinkActive="active-link">lines</a>
+  </li>
+  <li>
+    <a [routerLink]="['/managers/stations']" routerLinkActive="active-link">stations</a>
+  </li>
+</ul>
+
+<router-outlet></router-outlet>
