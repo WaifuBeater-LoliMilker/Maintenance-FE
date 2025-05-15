@@ -1,20 +1,41 @@
-<ul>
-  <li>
-    <a [routerLink]="['/managers/overview']" routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }">overview</a>
-  </li>
-  <li>
-    <a [routerLink]="['/managers/factories']" routerLinkActive="active-link">factories</a>
-  </li>
-  <li>
-    <a [routerLink]="['/managers/zones']" routerLinkActive="active-link">zones</a>
-  </li>
-  <li>
-    <a [routerLink]="['/managers/lines']" routerLinkActive="active-link">lines</a>
-  </li>
-  <li>
-    <a [routerLink]="['/managers/stations']" routerLinkActive="active-link">stations</a>
-  </li>
-</ul>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer [mode]="isSide ? 'side' : 'over'">
+    <mat-toolbar>
+      <span>Menu</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="isSide = !isSide">
+        <mat-icon fontSet="material-symbols-outlined">{{isSide?'keep_off':'keep'}}</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/managers/overview']" routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">Overview</a>
+      <a mat-list-item [routerLink]="['/managers/factories']" routerLinkActive="active-link">Factories</a>
+      <a mat-list-item [routerLink]="['/managers/zones']" routerLinkActive="active-link">Zones</a>
+      <a mat-list-item [routerLink]="['/managers/lines']" routerLinkActive="active-link">Lines</a>
+      <a mat-list-item [routerLink]="['/managers/stations']" routerLinkActive="active-link">Stations</a>
+    </mat-nav-list>
+  </mat-sidenav>
 
-<router-outlet></router-outlet>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <div class="d-flex align-items-center">
+        <button mat-icon-button (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>Quản lý bảo trì</span>
+        <span class="spacer"></span>
+        <!-- <button mat-icon-button aria-label="Notifications">
+          <mat-icon>notifications</mat-icon>
+        </button> -->
+        <button mat-icon-button aria-label="Account">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

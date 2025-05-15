@@ -1,6 +1,39 @@
-.active-link {
-  color: orangered;
+.sidenav-container {
+  height: 100vh;
 }
-li {
-  cursor: pointer;
+
+mat-sidenav-content>mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 0;
+}
+
+mat-sidenav-content>mat-toolbar>div {
+  height: 100%;
+  width: 100%;
+  box-shadow: 15px 9px 25px 0 rgba(0, 0, 0, 0.1);
+  padding: 0 20px;
+}
+
+.content {
+  padding: 16px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.app-title {
+  font-weight: bold;
+}
+
+mat-sidenav>mat-toolbar {
+  padding: 0 20px;
+}
+
+mat-sidenav {
+  max-width: 250px;
+  border-right: 1px solid rgba(0, 0, 0, 0.193);
+  box-shadow: 3px 1px 5px 0 rgba(0, 0, 0, 0.1);
 }
