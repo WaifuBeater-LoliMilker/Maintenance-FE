@@ -1,7 +1,9 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { BASE_URL } from '../app.config';
 import { tap } from 'rxjs/operators';
+import { jwtDecode, JwtPayload } from 'jwt-decode';
+import { IS_ANONYMOUS } from '../auth.interceptor';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -15,7 +17,10 @@ export class AuthService {
       .post<{ fullname: string; accessToken: string; redirect: string }>(
         `${this.baseUrl}/auth/login`,
         credentials,
-        { withCredentials: true }
+        {
+          context: new HttpContext().set(IS_ANONYMOUS, true),
+          withCredentials: true,
+        }
       )
       .pipe(
         tap((response) => {
@@ -36,7 +41,7 @@ export class AuthService {
       { withCredentials: true }
     );
   }
-  checkRole() {
+  getRoleFromAPI() {
     const token = localStorage.getItem('access_token');
     return this.http.post<{ role: number }>(
       `${this.baseUrl}/auth/role`,
@@ -48,5 +53,21 @@ export class AuthService {
         },
       }
     );
+  }
+  getRoleFromToken(): string | null {
+    const token = localStorage.getItem('access_token');
+    if (!token) return null;
+
+    try {
+      const decoded = jwtDecode<{
+        'http://schemas.microsoft.com/ws/2008/06/identity/claims/role': string;
+      }>(token);
+      return decoded[
+        'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+      ];
+    } catch (e) {
+      console.error('Invalid JWT token', e);
+      return null;
+    }
   }
 }

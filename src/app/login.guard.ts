@@ -8,7 +8,7 @@ export class LoginGuard implements CanActivate {
   constructor(private auth: AuthService, private router: Router) {}
 
   canActivate(): Observable<boolean | UrlTree> {
-    return this.auth.checkRole().pipe(
+    return this.auth.getRoleFromAPI().pipe(
       map((res) => this.router.createUrlTree([res.role])),
       catchError(() => of(true))
     );

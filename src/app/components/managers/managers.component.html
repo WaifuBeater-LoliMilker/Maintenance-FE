@@ -1,10 +1,11 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer [mode]="isSide ? 'side' : 'over'">
+  <mat-sidenav #drawer [mode]="isSideNavSideMode ? 'side' : 'over'" (openedChange)="onDrawerOpenChange($event)"
+    [opened]="isSideNavOpened">
     <mat-toolbar>
-      <span>Menu</span>
+      <img class="rtc-logo" src="/imgs/rtc-logo.png">
       <span class="spacer"></span>
-      <button mat-icon-button (click)="isSide = !isSide">
-        <mat-icon fontSet="material-symbols-outlined">{{isSide?'keep_off':'keep'}}</mat-icon>
+      <button mat-icon-button (click)="onDrawerModeChange()">
+        <mat-icon fontSet="material-symbols-outlined">{{isSideNavSideMode?'keep_off':'keep'}}</mat-icon>
       </button>
     </mat-toolbar>
     <mat-nav-list>
@@ -28,9 +29,22 @@
         <!-- <button mat-icon-button aria-label="Notifications">
           <mat-icon>notifications</mat-icon>
         </button> -->
-        <button mat-icon-button aria-label="Account">
+        <button mat-icon-button [cdkMenuTriggerFor]="profileMenu" aria-label="Account options">
           <mat-icon>account_circle</mat-icon>
         </button>
+
+        <ng-template #profileMenu>
+          <div class="profile-menu" cdkMenu>
+            <button mat-menu-item class="profile-menu-item">
+              <mat-icon>person</mat-icon>
+              <span>Profile</span>
+            </button>
+            <button mat-menu-item class="profile-menu-item">
+              <mat-icon>logout</mat-icon>
+              <span>Logout</span>
+            </button>
+          </div>
+        </ng-template>
       </div>
     </mat-toolbar>
 

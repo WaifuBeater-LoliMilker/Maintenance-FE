@@ -1,3 +1,7 @@
-<p>
-  factories works!
-</p>
+@for (factory of factories; track factory.id) {
+<div class="mb-3">
+  <div>{{factory.id}}</div>
+  <div>{{factory.code}}</div>
+  <div>{{factory.name}}</div>
+</div>
+}

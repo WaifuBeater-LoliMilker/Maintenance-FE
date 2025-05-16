@@ -18,16 +18,13 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> {
-    return this.auth.checkRole().pipe(
-      map((res) => {
-        const requiredRole = route.data['role'];
-        if (!requiredRole || res.role === requiredRole) {
-          return true;
-        }
-        return this.router.createUrlTree(['/login']);
-      }),
-      catchError(() => of(this.router.createUrlTree(['/login'])))
-    );
+  ): boolean | UrlTree {
+    const role = this.auth.getRoleFromToken();
+    const requiredRole = route.data['role'];
+    if (!requiredRole || requiredRole.toLowerCase() === role?.toLowerCase()) {
+      return true;
+    } else {
+      return this.router.createUrlTree(['/login']);
+    }
   }
 }
