@@ -1,9 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { BASE_URL } from '../app.config';
-import { tap } from 'rxjs/operators';
-import { jwtDecode, JwtPayload } from 'jwt-decode';
+import { map, tap } from 'rxjs/operators';
+import { jwtDecode } from 'jwt-decode';
 import { IS_ANONYMOUS } from '../auth.interceptor';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -32,7 +33,15 @@ export class AuthService {
   getAccessToken(): string | null {
     return localStorage.getItem('access_token');
   }
-
+  refreshToken(): Observable<string> {
+    return this.http
+      .post<{ access_token: string }>(
+        `${this.baseUrl}/auth/refresh`,
+        {},
+        { withCredentials: true }
+      )
+      .pipe(map((response) => response.access_token));
+  }
   logout() {
     localStorage.removeItem('access_token');
     return this.http.post(
@@ -47,6 +56,7 @@ export class AuthService {
       `${this.baseUrl}/auth/role`,
       {},
       {
+        context: new HttpContext().set(IS_ANONYMOUS, true),
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${token}`,
