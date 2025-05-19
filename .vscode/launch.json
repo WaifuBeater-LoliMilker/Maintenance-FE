@@ -7,10 +7,9 @@
       "type": "chrome",
       "request": "launch",
       "preLaunchTask": "npm: start",
-      "url": "http://localhost:4200/",
+      "url": "https://localhost:4200/",
       "runtimeArgs": [
         "--disable-session-crashed-bubble",
-        "--load-extension=C:/Users/Latitude 5520/AppData/Local/Google/Chrome/User Data/Default/Extensions/ienfalfjdbdpebioblfackkekamfmbnh/1.0.31_0"
       ],
       "postDebugTask": "stop dev server"
     },
@@ -19,7 +18,7 @@
       "type": "chrome",
       "request": "launch",
       "preLaunchTask": "npm: test",
-      "url": "http://localhost:9876/debug.html"
+      "url": "https://localhost:4200/debug.html"
     }
   ]
 }
