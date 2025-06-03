@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BASE_URL } from '../../app.config';
+import { Factories } from '../../models/factories';
 
 @Injectable({
   providedIn: 'root',
@@ -13,9 +14,4 @@ export class ManagersService {
   getAllFactories() {
     return this.http.get<Factories[]>(`${this.baseUrl}/factories`);
   }
-}
-export interface Factories {
-  id: number;
-  code: string;
-  name: string;
 }

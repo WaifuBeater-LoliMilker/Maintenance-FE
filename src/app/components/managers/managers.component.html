@@ -9,12 +9,11 @@
       </button>
     </mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/managers/overview']" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">Overview</a>
-      <a mat-list-item [routerLink]="['/managers/factories']" routerLinkActive="active-link">Factories</a>
-      <a mat-list-item [routerLink]="['/managers/zones']" routerLinkActive="active-link">Zones</a>
-      <a mat-list-item [routerLink]="['/managers/lines']" routerLinkActive="active-link">Lines</a>
-      <a mat-list-item [routerLink]="['/managers/stations']" routerLinkActive="active-link">Stations</a>
+      <a mat-list-item >Overview</a>
+      <a mat-list-item >Factories</a>
+      <a mat-list-item >Zones</a>
+      <a mat-list-item >Lines</a>
+      <a mat-list-item >Stations</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -49,7 +48,7 @@
     </mat-toolbar>
 
     <div class="content">
-      <router-outlet></router-outlet>
+      <!-- <router-outlet></router-outlet> -->
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

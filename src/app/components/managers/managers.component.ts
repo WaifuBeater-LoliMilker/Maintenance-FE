@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { Component, OnInit } from '@angular/core';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -11,9 +10,6 @@ import { CdkMenu, CdkMenuTrigger } from '@angular/cdk/menu';
 @Component({
   selector: 'app-managers',
   imports: [
-    RouterLink,
-    RouterLinkActive,
-    RouterOutlet,
     MatSidenavModule,
     MatToolbarModule,
     MatMenuModule,
@@ -27,10 +23,9 @@ import { CdkMenu, CdkMenuTrigger } from '@angular/cdk/menu';
   styleUrl: './managers.component.css',
 })
 export class ManagersComponent implements OnInit {
-  @ViewChild('drawer')
-  drawer!: MatSidenav;
   isSideNavSideMode = false;
   isSideNavOpened = false;
+
   ngOnInit(): void {
     this.isSideNavSideMode =
       localStorage.getItem('is_sidenav_side_mode') == 'side';

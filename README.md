@@ -30,7 +30,7 @@ mkcert --pkcs12 địachỉapi
 - Dùng file .p12 để import vào IIS và sử dụng cho api
 - Mật khẩu mặc định là `changeit`
 
-### Frontend certificate
+## Frontend certificate
 
 ```bash
 ng serve --ssl
