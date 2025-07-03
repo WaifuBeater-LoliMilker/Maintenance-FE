@@ -3,7 +3,7 @@
   <li class="nav-item" role="presentation">
     <button class="nav-link" [class.active]="tab.active" (click)="selectTab(tab.id)" type="button" role="tab">
       {{ tab.title }}
-      <span class="ms-2 text-danger" style="cursor:pointer" (click)="removeTab(tab.id)">×</span>
+      <span class="ms-2 text-danger cursor-pointer" (click)="removeTab(tab.id); $event.stopPropagation()">×</span>
     </button>
   </li>
   }

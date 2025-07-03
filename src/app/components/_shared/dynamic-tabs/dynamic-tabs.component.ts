@@ -1,34 +1,48 @@
-import { Component, Input, Output, EventEmitter, signal } from '@angular/core';
-import { NgIf, NgFor } from '@angular/common';
+import { Component, Input, Output, EventEmitter, Type } from '@angular/core';
 
 @Component({
-  selector: 'app-dynamic-tabs',
+  selector: 'dynamic-tabs',
   standalone: true,
   templateUrl: './dynamic-tabs.component.html',
 })
-export class DynamicTabsComponent {
-  @Input() tabs: Tab[] = [];
+export class DynamicTabsComponent<T> {
+  @Input() tabs: Tab<T>[] = [];
+  @Output() tabsChange = new EventEmitter<Tab<T>[]>();
   @Output() tabRemoved = new EventEmitter<string>();
-  @Output() tabSelected = new EventEmitter<Tab>();
+  @Output() tabSelected = new EventEmitter<Tab<T>>();
 
   selectTab(tabId: string) {
-    this.tabs.forEach((tab) => (tab.active = tab.id === tabId));
-    const selected = this.tabs.find((t) => t.id === tabId);
-    if (selected) this.tabSelected.emit(selected);
+    this.tabs = this.tabs.map((t) => ({
+      ...t,
+      active: t.id === tabId,
+    }));
+    this.tabsChange.emit(this.tabs);
+    this.tabSelected.emit(this.tabs.find((t) => t.id === tabId)!);
   }
 
   removeTab(tabId: string) {
-    const index = this.tabs.findIndex((t) => t.id === tabId);
-    const wasActive = this.tabs[index]?.active;
-    this.tabs.splice(index, 1);
-    if (wasActive && this.tabs.length) this.tabs[0].active = true;
+    const newTabs = [...this.tabs];
+    const idx = newTabs.findIndex((t) => t.id === tabId);
+    if (idx === -1) return;
+
+    const wasActive = newTabs[idx].active;
+    newTabs.splice(idx, 1);
+
+    if (wasActive && newTabs.length) {
+      const newIndex = idx < newTabs.length ? idx : newTabs.length - 1;
+      newTabs.forEach((t) => (t.active = false));
+      newTabs[newIndex].active = true;
+    }
+
+    this.tabs = newTabs;
+    this.tabsChange.emit(this.tabs);
     this.tabRemoved.emit(tabId);
   }
 }
 
-export interface Tab {
+export interface Tab<T> {
   id: string;
   title: string;
-  content: string;
+  content: string | Type<T>;
   active: boolean;
 }

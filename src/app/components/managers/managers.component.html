@@ -9,11 +9,11 @@
       </button>
     </mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item >Overview</a>
-      <a mat-list-item >Factories</a>
-      <a mat-list-item >Zones</a>
-      <a mat-list-item >Lines</a>
-      <a mat-list-item >Stations</a>
+      <a mat-list-item (click)="onAddTab('Overview', 'OVERVIEW WORKED')">Overview</a>
+      <a mat-list-item (click)="onAddTab('Factories')">Factories</a>
+      <a mat-list-item (click)="onAddTab('Zones')">Zones</a>
+      <a mat-list-item (click)="onAddTab('Lines')">Lines</a>
+      <a mat-list-item (click)="onAddTab('Stations')">Stations</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -49,6 +49,9 @@
 
     <div class="content">
       <!-- <router-outlet></router-outlet> -->
+       <dynamic-tabs [(tabs)]="tabs" >
+
+       </dynamic-tabs>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
